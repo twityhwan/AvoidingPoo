@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">AvoidPoo</string>
+    <string name="best">Best</string>
+    <string name="score">Score</string>
+    <string name="left">LEFT</string>
+    <string name="pause">PAUSE</string>
+    <string name="right">RIGHT</string>
 </resources>
