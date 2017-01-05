@@ -12,7 +12,7 @@
     tools:context="com.example.twityhwan.avoidpoo.Main">
 
     <Button
-        android:text="Button"
+        android:text="@string/pause"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -20,7 +20,7 @@
         android:id="@+id/button3" />
 
     <Button
-        android:text="Button"
+        android:text="@string/left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/button"
@@ -31,7 +31,7 @@
         android:layout_marginEnd="20dp" />
 
     <Button
-        android:text="Button"
+        android:text="@string/right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/button2"
@@ -42,7 +42,7 @@
         android:layout_marginStart="21dp" />
 
     <TextView
-        android:text="TextView"
+        android:text="@string/best"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -51,7 +51,7 @@
         android:id="@+id/textView3" />
 
     <TextView
-        android:text="TextView"
+        android:text="@string/score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView3"
@@ -67,6 +67,6 @@
         android:layout_above="@+id/button3"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="17dp"
-        android:id="@+id/imageView" />
-
+        android:id="@+id/imageView"
+        android:contentDescription="@string/image" />
 </RelativeLayout>
