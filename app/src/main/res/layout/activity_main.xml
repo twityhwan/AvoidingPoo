@@ -17,29 +17,31 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:id="@+id/button3" />
+        android:id="@+id/btn_pause" />
 
     <Button
         android:text="@string/left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/button"
+        android:id="@+id/btn_left"
         android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/button3"
-        android:layout_toStartOf="@+id/button3"
+        android:layout_toLeftOf="@+id/btn_pause"
+        android:layout_toStartOf="@+id/btn_pause"
         android:layout_marginRight="20dp"
-        android:layout_marginEnd="20dp" />
+        android:layout_marginEnd="20dp"
+        android:onClick="btnLeft"/>
 
     <Button
         android:text="@string/right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/button2"
+        android:id="@+id/btn_right"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/button3"
-        android:layout_toEndOf="@+id/button3"
+        android:layout_toRightOf="@+id/btn_pause"
+        android:layout_toEndOf="@+id/btn_pause"
         android:layout_marginLeft="21dp"
-        android:layout_marginStart="21dp" />
+        android:layout_marginStart="21dp"
+        android:onClick="btnRight"/>
 
     <TextView
         android:text="@string/best"
@@ -60,13 +62,5 @@
         android:layout_marginTop="14dp"
         android:id="@+id/textView4" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/ic_launcher"
-        android:layout_above="@+id/button3"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="17dp"
-        android:id="@+id/imageView"
-        android:contentDescription="@string/image" />
+
 </RelativeLayout>
