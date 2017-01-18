@@ -31,6 +31,14 @@ public class Main extends AppCompatActivity {
         findViewById(R.id.btn_left).setOnClickListener(pv.btnLeftClick);
         findViewById(R.id.btn_right).setOnClickListener(pv.btnRightClick);
         findViewById(R.id.btn_pause).setOnClickListener(btnPauseClick);
+
+
+        PooFactory pooFact = new PooFactory(this);
+        RelativeLayout ll = (RelativeLayout)findViewById(R.id.poo_layout);
+        for(int i=0; i<1; i++) {
+            ll.addView(pooFact.create(100, 100, 0, 0));
+        }
+
     }
 
     class PlayerView extends View{
