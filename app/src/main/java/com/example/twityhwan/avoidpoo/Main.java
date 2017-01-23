@@ -35,8 +35,8 @@ public class Main extends AppCompatActivity {
 
         PooFactory pooFact = new PooFactory(this);
         RelativeLayout ll = (RelativeLayout)findViewById(R.id.poo_layout);
-        for(int i=0; i<1; i++) {
-            ll.addView(pooFact.create(100, 100, 0, 0));
+        for(int i=0; i<10; i++) {
+            ll.addView(pooFact.create(100, 100));
         }
 
     }
