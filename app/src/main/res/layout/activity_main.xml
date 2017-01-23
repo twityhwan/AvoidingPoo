@@ -62,5 +62,10 @@
         android:layout_marginTop="14dp"
         android:id="@+id/textView4" />
 
-
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/poo_layout"></RelativeLayout>
 </RelativeLayout>
