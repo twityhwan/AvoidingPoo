@@ -1,15 +1,13 @@
 package com.example.twityhwan.avoidpoo;
 
+import android.animation.Animator;
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Point;
 import android.os.Handler;
 import android.os.Message;
 import android.util.DisplayMetrics;
-import android.view.Display;
-import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
 import android.widget.LinearLayout.LayoutParams;
 import android.view.animation.Animation;
 import android.widget.RelativeLayout;
@@ -22,8 +20,10 @@ import static com.example.twityhwan.avoidpoo.R.anim.poo_animation;
 class PooFactory {
     private Context m_context;
     private ArrayList<Poo> m_pooList;
+    ArrayList<Animator> m_animatorList;
     private int m_width;
     private int m_height;
+    boolean isPaused = false;
 
     protected class Poo extends android.support.v7.widget.AppCompatImageView {
         public Poo(Context context) {
@@ -43,8 +43,6 @@ class PooFactory {
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(w, h);
             params.setMargins(getRandomPosition(), 0, 0, 0);
             setLayoutParams(params);
-            Animation ani = AnimationUtils.loadAnimation(context, poo_animation);
-            setAnimation(ani);
         }
     }
 
@@ -57,15 +55,52 @@ class PooFactory {
     void create(int w, int h, int num) {
         RelativeLayout ll = (RelativeLayout) ((Activity)m_context).findViewById(R.id.poo_layout);
         for (int i=0; i<num; i++) {
-            Poo t_poo = new Poo(m_context, w, h);
+            final Poo t_poo = new Poo(m_context, w, h);
             ll.addView(t_poo);
             m_pooList.add(t_poo);
+
+            ValueAnimator animator = ValueAnimator.ofFloat(0, m_height);
+            animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    float value = (float) animation.getAnimatedValue();
+                    t_poo.setTranslationY(value);
+                }
+            });
+            animator.setDuration(5000);
+            animator.start();
+            m_animatorList.add(animator);
+        }
+    }
+
+    void pause() {
+        if (isPaused) return;
+
+        isPaused = true;
+        int num = m_animatorList.size();
+        for (int i=0; i<num; i++) {
+            m_animatorList.get(i).pause();
+        }
+    }
+
+    void restart() {
+
+    }
+
+    void resume() {
+        if (!isPaused) return;
+
+        isPaused = false;
+        int num = m_animatorList.size();
+        for (int i=0; i<num; i++) {
+            m_animatorList.get(i).resume();
         }
     }
 
     PooFactory(Context context) {
         m_context = context;
-        m_pooList = new ArrayList<Poo>();
+        m_pooList = new ArrayList<>();
+        m_animatorList = new ArrayList<>();
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
         m_width = metrics.widthPixels;
         m_height = metrics.heightPixels;
@@ -74,6 +109,27 @@ class PooFactory {
     private int getRandomPosition() {
         Random r = new Random();
         return r.nextInt(m_width);
+    }
+
+    private class PooAnimator extends ValueAnimator implements Animation.AnimationListener {
+
+        PooAnimator() {
+        }
+
+        @Override
+        public void onAnimationStart(Animation animation) {
+
+        }
+
+        @Override
+        public void onAnimationEnd(Animation animation) {
+
+        }
+
+        @Override
+        public void onAnimationRepeat(Animation animation) {
+
+        }
     }
 }
 

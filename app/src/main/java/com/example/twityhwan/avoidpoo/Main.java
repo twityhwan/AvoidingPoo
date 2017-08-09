@@ -3,15 +3,16 @@ package com.example.twityhwan.avoidpoo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 public class Main extends AppCompatActivity {
     int dw, dh;
-    ImageView player;
+    Player player;
+    PooFactory pooFact;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,15 +29,18 @@ public class Main extends AppCompatActivity {
             }
         });
 
-        player = (ImageView) findViewById(R.id.img_player);
+        player = new Player(this);
 
         // Set button listener
-        findViewById(R.id.btn_left).setOnClickListener(buttonListener);
-        findViewById(R.id.btn_right).setOnClickListener(buttonListener);
+        //findViewById(R.id.btn_left).setOnClickListener(buttonListener);
+        //findViewById(R.id.btn_right).setOnClickListener(buttonListener);
         findViewById(R.id.btn_pause).setOnClickListener(buttonListener);
 
+        findViewById(R.id.btn_left).setOnTouchListener(buttonTouchListener);
+        findViewById(R.id.btn_right).setOnTouchListener(buttonTouchListener);
+
         // Create poo
-        PooFactory pooFact = new PooFactory(this);
+        pooFact = new PooFactory(this);
         pooFact.create(100, 100, 10);
 
     }
@@ -48,21 +52,39 @@ public class Main extends AppCompatActivity {
             int id = v.getId();
             if (id == R.id.btn_pause) {
                 Log.d("buttonListener", "btn_pause");
+                pooFact.pause();
             } else if (id == R.id.btn_left) {
                 Log.d("buttonListener", "btn_left");
-                int nextX = (int) (player.getX()-10);
-                if (nextX>0) {
-                    player.setX(nextX);
-                    player.invalidate();
-                }
+                player.moveToLeft();
             } else if (id == R.id.btn_right) {
                 Log.d("buttonListener", "btn_right");
-                int nextX = (int) (player.getX()+10);
-                if (nextX+player.getWidth()<dw) {
-                    player.setX(nextX);
-                    player.invalidate();
-                }
+                player.moveToRight();
             }
+        }
+    };
+
+    Button.OnTouchListener buttonTouchListener = new Button.OnTouchListener() {
+
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            //Log.d("OnTouchListener", "onTouch event : "+event);
+            int action = event.getAction();
+            int id = v.getId();
+            if (action == MotionEvent.ACTION_MOVE) {
+                //buttonListener.onClick(v);
+            } else if (action == MotionEvent.ACTION_DOWN) {
+                switch(id) {
+                    case R.id.btn_left:
+                        player.moveToLeft();
+                        break;
+                    case R.id.btn_right:
+                        player.moveToRight();
+                        break;
+                }
+            } else if (action == MotionEvent.ACTION_UP) {
+                player.stop();
+            }
+            return false;
         }
     };
 }
