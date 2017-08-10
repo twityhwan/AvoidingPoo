@@ -25,7 +25,6 @@ public class Main extends AppCompatActivity {
             public void onGlobalLayout() {
                 dw = layout.getWidth();
                 dh = layout.getHeight();
-                Log.d("onCreate", "dw: "+dw+", dh: "+dh);
             }
         });
 
